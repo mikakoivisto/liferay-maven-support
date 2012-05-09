@@ -21,6 +21,28 @@
 					<liferayVersion>${liferay.version}</liferayVersion>
 					<pluginType>layouttpl</pluginType>
 				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>com.liferay.portal</groupId>
+						<artifactId>portal-impl</artifactId>
+						<version>${liferay.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>com.liferay.portal</groupId>
+						<artifactId>portal-service</artifactId>
+						<version>${liferay.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>com.liferay.portal</groupId>
+						<artifactId>util-bridges</artifactId>
+						<version>${liferay.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>com.liferay.portal</groupId>
+						<artifactId>util-java</artifactId>
+						<version>${liferay.version}</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
