@@ -18,7 +18,7 @@
 			<plugin>
 				<groupId>com.liferay.maven.plugins</groupId>
 				<artifactId>liferay-maven-plugin</artifactId>
-				<version>${liferay.version}</version>
+				<version>${liferay.plugins.version}</version>
 				<configuration>
 					<webappBaseDir>${basedir}/../${artifactId}-portlet</webappBaseDir>
 				</configuration>
@@ -29,7 +29,7 @@
 		<dependency>
 			<groupId>com.liferay.portal</groupId>
 			<artifactId>portal-service</artifactId>
-			<version>${liferay.version}</version>
+			<version>${liferay.dependencies.version}</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

@@ -12,4 +12,12 @@
 			<directory>src/main/webapp</directory>
 		</fileSet>
 	</fileSets>
+	<requiredProperties>
+		<requiredProperty key="liferay-dependencies-version">
+			<defaultValue>6.2.0-SNAPSHOT</defaultValue>
+		</requiredProperty>
+		<requiredProperty key="liferay-plugins-version" >
+			<defaultValue>6.2.0-SNAPSHOT</defaultValue>
+		</requiredProperty>
+	</requiredProperties>
 </archetype-descriptor>

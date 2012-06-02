@@ -12,13 +12,13 @@
 			<plugin>
 				<groupId>com.liferay.maven.plugins</groupId>
 				<artifactId>liferay-maven-plugin</artifactId>
-				<version>${liferay.version}</version>
+				<version>${liferay.plugins.version}</version>
 				<configuration>
 					<autoDeployDir>${liferay.auto.deploy.dir}</autoDeployDir>
 					<appServerDeployDir>${liferay.app.server.deploy.dir}</appServerDeployDir>
 					<appServerLibGlobalDir>${liferay.app.server.lib.global.dir}</appServerLibGlobalDir>
 					<appServerPortalDir>${liferay.app.server.portal.dir}</appServerPortalDir>
-					<liferayVersion>${liferay.version}</liferayVersion>
+					<liferayVersion>${liferay.dependencies.version}</liferayVersion>
 					<pluginName>${artifactId}-ext</pluginName>
 					<pluginType>ext</pluginType>
 				</configuration>
@@ -26,22 +26,22 @@
 					<dependency>
 						<groupId>com.liferay.portal</groupId>
 						<artifactId>portal-impl</artifactId>
-						<version>${liferay.version}</version>
+						<version>${liferay.dependencies.version}</version>
 					</dependency>
 					<dependency>
 						<groupId>com.liferay.portal</groupId>
 						<artifactId>portal-service</artifactId>
-						<version>${liferay.version}</version>
+						<version>${liferay.dependencies.version}</version>
 					</dependency>
 					<dependency>
 						<groupId>com.liferay.portal</groupId>
 						<artifactId>util-bridges</artifactId>
-						<version>${liferay.version}</version>
+						<version>${liferay.dependencies.version}</version>
 					</dependency>
 					<dependency>
 						<groupId>com.liferay.portal</groupId>
 						<artifactId>util-java</artifactId>
-						<version>${liferay.version}</version>
+						<version>${liferay.dependencies.version}</version>
 					</dependency>
 				</dependencies>
 			</plugin>
@@ -94,4 +94,8 @@
 		<module>${artifactId}-ext-util-taglib</module>
 		<module>${artifactId}-ext-web</module>
 	</modules>
+	<properties>
+		<liferay.dependencies.version>${liferay-dependencies-version}</liferay.dependencies.version>
+		<liferay.plugins.version>${liferay-plugins-version}</liferay.plugins.version>
+	</properties>
 </project>
