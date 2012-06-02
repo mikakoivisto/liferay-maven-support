@@ -19,6 +19,7 @@ import com.liferay.portal.cache.memory.MemoryPortalCacheManager;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.HtmlImpl;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -47,6 +48,11 @@ import org.codehaus.plexus.archiver.manager.ArchiverManager;
 public abstract class AbstractLiferayMojo extends AbstractMojo {
 
 	public void execute() throws MojoExecutionException {
+		if(Validator.isNull(pluginType)) {
+			getLog().info("Not a valid Liferay project");
+			return;
+		}
+
 		try {
 			initPortal();
 
@@ -205,8 +211,7 @@ public abstract class AbstractLiferayMojo extends AbstractMojo {
 	protected ArtifactRepository localArtifactRepository;
 
 	/**
-	 * @parameter default-value="portlet" expression="${pluginType}"
-	 * @required
+	 * @parameter expression="${pluginType}"
 	 */
 	protected String pluginType;
 
