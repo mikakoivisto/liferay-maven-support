@@ -12,15 +12,37 @@
 			<plugin>
 				<groupId>com.liferay.maven.plugins</groupId>
 				<artifactId>liferay-maven-plugin</artifactId>
-				<version>${liferay.version}</version>
+				<version>${liferay.plugins.version}</version>
 				<configuration>
 					<autoDeployDir>${liferay.auto.deploy.dir}</autoDeployDir>
 					<appServerDeployDir>${liferay.app.server.deploy.dir}</appServerDeployDir>
 					<appServerLibGlobalDir>${liferay.app.server.lib.global.dir}</appServerLibGlobalDir>
 					<appServerPortalDir>${liferay.app.server.portal.dir}</appServerPortalDir>
-					<liferayVersion>${liferay.version}</liferayVersion>
+					<liferayVersion>${liferay.dependencies.version}</liferayVersion>
 					<pluginType>web</pluginType>
 				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>com.liferay.portal</groupId>
+						<artifactId>portal-impl</artifactId>
+						<version>${liferay.dependencies.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>com.liferay.portal</groupId>
+						<artifactId>portal-service</artifactId>
+						<version>${liferay.dependencies.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>com.liferay.portal</groupId>
+						<artifactId>util-bridges</artifactId>
+						<version>${liferay.dependencies.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>com.liferay.portal</groupId>
+						<artifactId>util-java</artifactId>
+						<version>${liferay.dependencies.version}</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -42,13 +64,13 @@
 		<dependency>
 			<groupId>com.liferay.portal</groupId>
 			<artifactId>portal-service</artifactId>
-			<version>${liferay.version}</version>
+			<version>${liferay.dependencies.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.liferay.portal</groupId>
 			<artifactId>util-java</artifactId>
-			<version>${liferay.version}</version>
+			<version>${liferay.dependencies.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -70,4 +92,6 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
+		<liferay.dependencies.version>${liferay-dependencies-version}</liferay.dependencies.version>
+		<liferay.plugins.version>${liferay-plugins-version}</liferay.plugins.version>
 </project>
