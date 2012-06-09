@@ -15,6 +15,7 @@
 	<modules>
 		<module>liferay-ext-archetype</module>
 		<module>liferay-hook-archetype</module>
+		<module>liferay-jsf2-portlet-archetype</module>
 		<module>liferay-layouttpl-archetype</module>
 		<module>liferay-portlet-archetype</module>
 		<module>liferay-servicebuilder-archetype</module>

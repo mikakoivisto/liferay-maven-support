@@ -138,6 +138,7 @@
 	</profiles>
 	<properties>
 		<liferay.version>6.2.0-SNAPSHOT</liferay.version>
+		<liferay.faces.version>3.1.0</liferay.faces.version>
 		<maven.version>2.0.10</maven.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<liferay.repository.release.id>sonatype-staging</liferay.repository.release.id>
