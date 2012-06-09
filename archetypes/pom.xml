@@ -17,6 +17,7 @@
 		<module>liferay-hook-archetype</module>
 		<module>liferay-layouttpl-archetype</module>
 		<module>liferay-portlet-archetype</module>
+		<module>liferay-richfaces4-portlet-archetype</module>
 		<module>liferay-servicebuilder-archetype</module>
 		<module>liferay-theme-archetype</module>
 		<module>liferay-web-archetype</module>
