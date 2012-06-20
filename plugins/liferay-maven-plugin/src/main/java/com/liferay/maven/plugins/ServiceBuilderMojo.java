@@ -481,12 +481,6 @@ public class ServiceBuilderMojo extends AbstractLiferayMojo {
 	private String pluginName;
 
 	/**
-	 * @parameter default-value="portlet" expression="${pluginType}"
-	 * @required
-	 */
-	private String pluginType;
-
-	/**
 	 * @deprecated
 	 * @parameter default-value="false" expression="${postBuildDependencyModules}"
 	 * @since 6.1.0
