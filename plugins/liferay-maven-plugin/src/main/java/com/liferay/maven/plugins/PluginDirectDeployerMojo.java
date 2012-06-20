@@ -147,17 +147,20 @@ public class PluginDirectDeployerMojo extends AbstractLiferayMojo {
 
 			File sourceDir =
 				new File(build.getDirectory(), build.getFinalName());
-			String customWebXml = sourceDir + "/WEB-INF/web.xml";
+			File customWebXml = new File(sourceDir, "/WEB-INF/web.xml");
 
 			CopyTask.copyDirectory(
 				sourceDir, appServerDeployDir, null, "WEB-INF/web.xml", true,
 				true);
 
-			new WebXMLBuilder(
-				originalWebXml.getAbsolutePath(), customWebXml,
-				mergedWebXml.getAbsolutePath());
+			if (customWebXml.exists()) {
+				new WebXMLBuilder(
+					originalWebXml.getAbsolutePath(),
+					customWebXml.getAbsolutePath(),
+					mergedWebXml.getAbsolutePath());
 
-			FileUtil.move(mergedWebXml, originalWebXml);
+				FileUtil.move(mergedWebXml, originalWebXml);
+			}
 		}
 
 		if (artifactId.endsWith("-ext")
