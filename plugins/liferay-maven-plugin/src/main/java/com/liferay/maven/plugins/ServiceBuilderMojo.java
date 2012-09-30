@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.tools.servicebuilder.ServiceBuilder;
 
 import java.io.File;
+import java.lang.reflect.Constructor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,16 +123,64 @@ public class ServiceBuilderMojo extends AbstractLiferayMojo {
 			}
 		}
 
-		new ServiceBuilder(
-			serviceFileName, hbmFileName, ormFileName, modelHintsFileName,
-			springFileName, springBaseFileName, springClusterFileName,
-			springDynamicDataSourceFileName, springHibernateFileName,
-			springInfrastructureFileName, springShardDataSourceFileName, apiDir,
-			implDir, remotingFileName, sqlDir, sqlFileName, sqlIndexesFileName,
-			sqlIndexesPropertiesFileName, sqlSequencesFileName,
-			autoNamespaceTables, beanLocatorUtil, propsUtil, pluginName,
-			targetEntityName, null, true, serviceBuildNumber,
-			serviceBuildNumberIncrement);
+		if (liferayVersion.startsWith("6.0")) {
+			Class[] parameterTypes = new Class[]{
+				String.class, String.class, String.class, String.class,
+				String.class, String.class, String.class, String.class,
+				String.class, String.class, String.class, String.class,
+				String.class, String.class, String.class, String.class,
+				String.class, String.class, String.class, String.class,
+				boolean.class, String.class, String.class, String.class,
+				String.class};
+			Constructor<ServiceBuilder> constructor =
+				ServiceBuilder.class.getConstructor(parameterTypes);
+
+			constructor.newInstance(
+				serviceFileName, hbmFileName, ormFileName, modelHintsFileName,
+				springFileName, springBaseFileName, springClusterFileName,
+				springDynamicDataSourceFileName, springHibernateFileName,
+				springInfrastructureFileName, springShardDataSourceFileName,
+				apiDir, implDir, null, remotingFileName, sqlDir,
+				sqlFileName, sqlIndexesFileName, sqlIndexesPropertiesFileName,
+				sqlSequencesFileName, autoNamespaceTables, beanLocatorUtil,
+				propsUtil, pluginName, null);
+		}
+		else if  (liferayVersion.startsWith("6.1")) {
+			Class[] parameterTypes = new Class[]{
+				String.class, String.class, String.class, String.class,
+				String.class, String.class, String.class, String.class,
+				String.class, String.class, String.class, String.class,
+				String.class, String.class, String.class, String.class,
+				String.class, String.class, String.class, String.class,
+				boolean.class, String.class, String.class, String.class,
+				String.class, String.class, boolean.class, long.class,
+				boolean.class};
+			Constructor<ServiceBuilder> constructor =
+				ServiceBuilder.class.getConstructor(parameterTypes);
+
+			constructor.newInstance(
+				serviceFileName, hbmFileName, ormFileName, modelHintsFileName,
+				springFileName, springBaseFileName, springClusterFileName,
+				springDynamicDataSourceFileName, springHibernateFileName,
+				springInfrastructureFileName, springShardDataSourceFileName,
+				apiDir, implDir, null, remotingFileName, sqlDir, sqlFileName,
+				sqlIndexesFileName, sqlIndexesPropertiesFileName,
+				sqlSequencesFileName, autoNamespaceTables, beanLocatorUtil,
+				propsUtil, pluginName, targetEntityName, null, true,
+				serviceBuildNumber, serviceBuildNumberIncrement);
+		}
+		else if  (liferayVersion.startsWith("6.2")) {
+			new ServiceBuilder(
+				serviceFileName, hbmFileName, ormFileName, modelHintsFileName,
+				springFileName, springBaseFileName, springClusterFileName,
+				springDynamicDataSourceFileName, springHibernateFileName,
+				springInfrastructureFileName, springShardDataSourceFileName,
+				apiDir, implDir, remotingFileName, sqlDir, sqlFileName,
+				sqlIndexesFileName, sqlIndexesPropertiesFileName,
+				sqlSequencesFileName, autoNamespaceTables, beanLocatorUtil,
+				propsUtil, pluginName, targetEntityName, null, true,
+				serviceBuildNumber, serviceBuildNumberIncrement);
+		}
 
 		if (tempServiceFile != null) {
 			FileUtil.delete(tempServiceFile);
