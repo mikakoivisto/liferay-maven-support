@@ -133,6 +133,15 @@ public class ThemeMergeMojo extends AbstractLiferayMojo {
 
 			unArchiver.extract();
 		}
+		else if(parentThemeId.equals("classic") || parentThemeId.equals("control_panel")) {
+			File parentThemeWorkDir = new File(workDir, "html/themes/" + parentThemeId);
+
+			parentThemeWorkDir.mkdirs();
+
+			FileUtils.copyDirectory(
+				new File(appServerPortalDir, "html/themes/" + parentThemeId),
+				parentThemeWorkDir);
+		}
 
 		File liferayLookAndFeelXml = new File(
 			webappSourceDir, "WEB-INF/liferay-look-and-feel.xml");
