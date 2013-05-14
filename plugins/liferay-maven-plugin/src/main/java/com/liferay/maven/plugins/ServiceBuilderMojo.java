@@ -172,7 +172,7 @@ public class ServiceBuilderMojo extends AbstractLiferayMojo {
 		args[27] =
 			"service.build.number.increment=" + serviceBuildNumberIncrement;
 
-		ServiceBuilder.main(args);
+		ServiceBuilder.reenterableMain(args);
 
 		if (tempServiceFile != null) {
 			FileUtil.delete(tempServiceFile);
