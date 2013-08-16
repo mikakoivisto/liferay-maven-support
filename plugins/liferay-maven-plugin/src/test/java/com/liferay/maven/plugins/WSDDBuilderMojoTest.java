@@ -30,6 +30,9 @@ public class WSDDBuilderMojoTest extends AbstractLiferayMojoTestCase {
     public void testWSDDBuilderMojo() throws Exception {
         generateWSDDBuilderProject();
 
+        verifier = new Verifier("target/testproject");
+        verifier.setAutoclean(false);
+
         executeGoal("liferay:build-service");
         executeGoal("install");
         executeGoal("liferay:build-wsdd");
@@ -39,9 +42,6 @@ public class WSDDBuilderMojoTest extends AbstractLiferayMojoTestCase {
             checkExists(
                 "target/testproject/testproject-portlet/src/main/webapp/" +
                 "WEB-INF/server-config.wsdd"));
-
-        verifier = new Verifier("target/testproject");
-        verifier.setAutoclean(false);
     }
 
     protected void generateWSDDBuilderProject() throws Exception {
