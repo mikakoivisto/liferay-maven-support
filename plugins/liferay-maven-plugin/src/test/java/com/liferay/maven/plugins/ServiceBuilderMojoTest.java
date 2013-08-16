@@ -14,45 +14,41 @@
 package com.liferay.maven.plugins;
 
 import com.liferay.maven.AbstractLiferayMojoTestCase;
-import org.apache.maven.project.MavenProject;
 
 import java.io.File;
-import org.apache.maven.it.Verifier;
 
+import org.apache.maven.it.Verifier;
+import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.util.FileUtils;
 
 /**
+ * @author Matthew Tambara
  * @author William Newbury
  */
-public class LangBuilderMojoTest extends AbstractLiferayMojoTestCase {
+public class ServiceBuilderMojoTest extends AbstractLiferayMojoTestCase {
 
-    public void testLangBuilderMojo() throws Exception {
-        generateLangBuilderProject();
+    public void testServiceBuilderMojo() throws Exception {
+        generateServiceBuilderProject();
 
         verifier = new Verifier("target/testproject");
 
-        executeGoal("liferay:build-lang");
+        executeGoal("liferay:build-service");
 
         assertTrue(
-            "cant find resource/content/Language_ar.properties",
+            "Can't find src/main/java/com/liferay/maven/tests/model/impl" +
+            "/FooBaseImpl.java",
             checkExists(
-                "target/testproject/src/main/resources/" +
-                "content/Language_ar.properties"));
+                "target/testproject/testproject-portlet/src/main/java/com/" +
+                "liferay/maven/model/impl/FooBaseImpl.java"));
     }
 
-    protected void generateLangBuilderProject() throws Exception {
-        generateArchetype("liferay-theme-archetype");
+    protected void generateServiceBuilderProject() throws Exception {
+        generateArchetype("liferay-servicebuilder-archetype");
 
         File pomPath = new File("target/testproject/pom.xml");
         FileUtils.forceDelete(pomPath);
         FileUtils.copyFile(
-            new File("src/test/resources/theme/pom.xml"), pomPath);
-
-        String contentDir = "target/testproject/src/main/resources/content/";
-        File file = new File(contentDir);
-        file.mkdirs();
-        file = new File(contentDir + "language.properties");
-        file.createNewFile();
+            new File("src/test/resources/service/pom.xml"), pomPath);
     }
 
 }
