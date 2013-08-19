@@ -14,8 +14,6 @@
 
 package com.liferay.maven;
 
-import com.liferay.maven.plugins.LangBuilderMojo;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
