@@ -11,13 +11,15 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.maven.plugins;
 
 import com.liferay.maven.AbstractLiferayMojoTestCase;
-import org.apache.maven.project.MavenProject;
 
 import java.io.File;
+
 import org.apache.maven.it.Verifier;
+import org.apache.maven.project.MavenProject;
 
 import org.codehaus.plexus.util.FileUtils;
 
@@ -52,15 +54,12 @@ public class SassToCssBuilderMojoTest extends AbstractLiferayMojoTestCase {
         FileUtils.copyFile(
             new File("src/test/resources/theme/pom.xml"), pomPath);
 
-        String cssDir = "target/testproject/test/" +
+        String cssDir = "target/testproject/target/" +
                         "testproject-1.0-SNAPSHOT/css/";
         File file = new File(cssDir);
         file.mkdirs();
         file = new File(cssDir + "main.css");
         file.createNewFile();
-
-        file = new File("target/testproject/test/");
-        file.renameTo(new File("target/testproject/target"));
     }
 
 }

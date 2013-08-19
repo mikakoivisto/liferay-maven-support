@@ -11,28 +11,26 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.maven;
 
+import com.liferay.maven.plugins.LangBuilderMojo;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import org.junit.Assert;
 
 import org.apache.maven.archetype.Archetype;
 import org.apache.maven.archetype.ArchetypeGenerationRequest;
 import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.artifact.repository.DefaultArtifactRepository;
 import org.apache.maven.artifact.repository.layout.ArtifactRepositoryLayout;
+import org.apache.maven.it.Verifier;
 import org.apache.maven.model.Build;
 import org.apache.maven.plugin.testing.AbstractMojoTestCase;
 import org.apache.maven.plugin.testing.stubs.MavenProjectStub;
 import org.apache.maven.project.MavenProject;
-
-import org.apache.maven.it.Verifier;
-
-import com.liferay.maven.plugins.LangBuilderMojo;
-
-import java.io.File;
 
 import org.codehaus.plexus.util.FileUtils;
 import org.codehaus.plexus.util.StringUtils;

@@ -11,6 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.maven.plugins;
 
 import com.liferay.maven.AbstractLiferayMojoTestCase;
@@ -19,6 +20,7 @@ import java.io.File;
 
 import org.apache.maven.it.Verifier;
 import org.apache.maven.project.MavenProject;
+
 import org.codehaus.plexus.util.FileUtils;
 
 /**
@@ -33,7 +35,6 @@ public class PluginDeployerMojoTest extends AbstractLiferayMojoTestCase {
         verifier = new Verifier("target/testproject");
         verifier.setAutoclean(false);
 
-        executeGoal("liferay:build-service");
         executeGoal("install");
         executeGoal("liferay:deploy");
 
