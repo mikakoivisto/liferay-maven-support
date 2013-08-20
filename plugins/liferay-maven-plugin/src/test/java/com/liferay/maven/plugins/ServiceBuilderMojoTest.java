@@ -32,7 +32,7 @@ public class ServiceBuilderMojoTest extends AbstractLiferayMojoTestCase {
     public void testServiceBuilderMojo() throws Exception {
         generateServiceBuilderProject();
 
-        verifier = new Verifier("target/testproject");
+        verifier = new Verifier(getBasedir() + "/target/testproject");
 
         executeGoal("liferay:build-service");
 
@@ -47,10 +47,11 @@ public class ServiceBuilderMojoTest extends AbstractLiferayMojoTestCase {
     protected void generateServiceBuilderProject() throws Exception {
         generateArchetype("liferay-servicebuilder-archetype");
 
-        File pomPath = new File("target/testproject/pom.xml");
+        File pomPath = new File(getBasedir() + "/target/testproject/pom.xml");
         FileUtils.forceDelete(pomPath);
         FileUtils.copyFile(
-            new File("src/test/resources/service/pom.xml"), pomPath);
+            new File(getBasedir() + "/src/test/resources/service/pom.xml"),
+            pomPath);
     }
 
 }

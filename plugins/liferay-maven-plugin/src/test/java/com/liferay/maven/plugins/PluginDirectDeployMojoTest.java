@@ -31,7 +31,8 @@ public class PluginDirectDeployMojoTest extends AbstractLiferayMojoTestCase {
     public void testPluginDirectDeployMojo() throws Exception {
         generateDirectDeployProject();
 
-        verifier = new Verifier("target/testproject/testproject-ext-impl");
+        verifier = new Verifier(
+            getBasedir() +"/target/testproject/testproject-ext-impl");
 
         verifier.setAutoclean(false);
         assertFalse(verifier.isAutoclean());
@@ -59,12 +60,15 @@ public class PluginDirectDeployMojoTest extends AbstractLiferayMojoTestCase {
     protected void generateDirectDeployProject() throws Exception {
         generateArchetype("liferay-ext-archetype");
 
-        File pomPath = new File("target/testproject/pom.xml");
+        File pomPath = new File(
+            getBasedir() +"/target/testproject/pom.xml");
         FileUtils.forceDelete(pomPath);
         FileUtils.copyFile(
-            new File("src/test/resources/directdeploy/pom.xml"), pomPath);
+            new File(getBasedir() + "/src/test/resources/directdeploy/pom.xml"),
+            pomPath);
 
-        String jarDir = "target/testproject/testproject-ext-impl/target/";
+        String jarDir = getBasedir() +
+            "/target/testproject/testproject-ext-impl/target/";
         File file = new File(jarDir);
         file.mkdirs();
         file = new File(jarDir + "classes");

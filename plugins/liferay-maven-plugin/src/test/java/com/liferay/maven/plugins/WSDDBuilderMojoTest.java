@@ -32,8 +32,10 @@ public class WSDDBuilderMojoTest extends AbstractLiferayMojoTestCase {
     public void testWSDDBuilderMojo() throws Exception {
         generateWSDDBuilderProject();
 
-        verifier = new Verifier("target/testproject");
+        verifier = new Verifier(getBasedir() + "/target/testproject");
+
         verifier.setAutoclean(false);
+        assertFalse(verifier.isAutoclean());
 
         executeGoal("liferay:build-service");
         executeGoal("install");
@@ -49,10 +51,11 @@ public class WSDDBuilderMojoTest extends AbstractLiferayMojoTestCase {
     protected void generateWSDDBuilderProject() throws Exception {
         generateArchetype("liferay-servicebuilder-archetype");
 
-        File pomPath = new File("target/testproject/pom.xml");
+        File pomPath = new File(getBasedir() + "/target/testproject/pom.xml");
         FileUtils.forceDelete(pomPath);
         FileUtils.copyFile(
-            new File("src/test/resources/service/pom.xml"), pomPath);
+            new File(getBasedir() + "/src/test/resources/service/pom.xml"),
+            pomPath);
     }
 
 }

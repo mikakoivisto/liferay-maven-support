@@ -31,7 +31,7 @@ public class ThemeMergeMojoTest extends AbstractLiferayMojoTestCase {
     public void testThemeMerge() throws Exception {
         generateThemeMergeTestProject();
 
-        verifier = new Verifier("target/testproject");
+        verifier = new Verifier(getBasedir() + "/target/testproject");
 
         executeGoal("liferay:theme-merge");
 
@@ -54,10 +54,11 @@ public class ThemeMergeMojoTest extends AbstractLiferayMojoTestCase {
     protected void generateThemeMergeTestProject() throws Exception {
         generateArchetype("liferay-theme-archetype");
 
-        File pomPath = new File("target/testproject/pom.xml");
+        File pomPath = new File(getBasedir() + "/target/testproject/pom.xml");
         FileUtils.forceDelete(pomPath);
         FileUtils.copyFile(
-            new File("src/test/resources/theme/pom.xml"), pomPath);
+            new File(getBasedir() + "/src/test/resources/theme/pom.xml"),
+            pomPath);
     }
 
 }

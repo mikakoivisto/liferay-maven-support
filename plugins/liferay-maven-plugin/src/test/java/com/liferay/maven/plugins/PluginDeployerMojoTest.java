@@ -32,8 +32,10 @@ public class PluginDeployerMojoTest extends AbstractLiferayMojoTestCase {
     public void testPluginDeployerMojo() throws Exception {
         generatePluginDeployerProject();
 
-        verifier = new Verifier("target/testproject");
+        verifier = new Verifier(getBasedir() + "/target/testproject");
+
         verifier.setAutoclean(false);
+        assertFalse(verifier.isAutoclean());
 
         executeGoal("install");
         executeGoal("liferay:deploy");
@@ -48,15 +50,18 @@ public class PluginDeployerMojoTest extends AbstractLiferayMojoTestCase {
     protected void generatePluginDeployerProject() throws Exception {
         generateArchetype("liferay-servicebuilder-archetype");
 
-        File warPath = new File("target/testproject/src/main/resources/" +
-            "testproject-portlet-1.0-SNAPSHOT.war");
-        FileUtils.copyFile(new File("src/test/resources/service/" +
-            "testproject-portlet-1.0-SNAPSHOT.war"), warPath);
-
-        File pomPath = new File("target/testproject/pom.xml");
+        File pomPath = new File(getBasedir() + "/target/testproject/pom.xml");
         FileUtils.forceDelete(pomPath);
         FileUtils.copyFile(
-            new File("src/test/resources/service/pom.xml"), pomPath);
+            new File(getBasedir() + "/src/test/resources/service/pom.xml"),
+            pomPath);
+
+        File warPath = new File(
+            getBasedir() + "/target/testproject/src/main/resources/" +
+            "testproject-portlet-1.0-SNAPSHOT.war");
+        FileUtils.copyFile(new File(
+            getBasedir() + "/src/test/resources/service/" +
+            "testproject-portlet-1.0-SNAPSHOT.war"), warPath);
     }
 
 }

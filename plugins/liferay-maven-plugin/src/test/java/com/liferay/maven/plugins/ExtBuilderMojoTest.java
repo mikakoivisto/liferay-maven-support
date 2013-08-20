@@ -34,13 +34,18 @@ public class ExtBuilderMojoTest extends AbstractLiferayMojoTestCase {
     public void testExtBuilderMojo() throws Exception {
         generateExtBuilderProject();
 
-        verifier = new Verifier("target/testproject");
+        verifier = new Verifier(getBasedir() +"/target/testproject");
+
         verifier.setAutoclean(false);
+        assertFalse(verifier.isAutoclean());
 
         executeGoal("install");
 
-        verifier = new Verifier("target/testproject/testproject-ext");
+        verifier = new Verifier(
+            getBasedir() +"/target/testproject/testproject-ext");
+
         verifier.setAutoclean(false);
+        assertFalse(verifier.isAutoclean());
 
         List cliOptions = new ArrayList();
         cliOptions.add(
@@ -70,23 +75,27 @@ public class ExtBuilderMojoTest extends AbstractLiferayMojoTestCase {
     protected void generateExtBuilderProject() throws Exception {
         generateArchetype("liferay-ext-archetype");
 
+        File pomPath = new File(getBasedir() +"/target/testproject/pom.xml");
+        FileUtils.forceDelete(pomPath);
+        FileUtils.copyFile(
+            new File(getBasedir() + "/src/test/resources/ext/pom.xml"),
+            pomPath);
+
         String sqlDir =
-            "target/testproject/testproject-ext/src/main/webapp/WEB-INF/sql";
+            getBasedir() +
+            "/target/testproject/testproject-ext/src/main/webapp/WEB-INF/sql";
         File file = new File(sqlDir);
         file.mkdirs();
 
         File servicePath =
             new File(
-                "target/testproject/testproject-ext-impl/src/main/resources/" +
+                getBasedir() +
+                "/target/testproject/testproject-ext-impl/src/main/resources/" +
                 "service.xml");
 
         FileUtils.copyFile(
-            new File("src/test/resources/ext/service.xml"), servicePath);
-
-        File pomPath = new File("target/testproject/pom.xml");
-        FileUtils.forceDelete(pomPath);
-        FileUtils.copyFile(
-            new File("src/test/resources/ext/pom.xml"), pomPath);
+            new File(getBasedir() +"/src/test/resources/ext/service.xml"),
+            servicePath);
     }
 
 }

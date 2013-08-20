@@ -31,7 +31,7 @@ public class SassToCssBuilderMojoTest extends AbstractLiferayMojoTestCase {
     public void testSassToCssBuilderMojo() throws Exception {
         generateSassToCssBuilderProject();
 
-        verifier = new Verifier("target/testproject");
+        verifier = new Verifier(getBasedir() + "/target/testproject");
 
         verifier.setAutoclean(false);
         assertFalse(verifier.isAutoclean());
@@ -49,12 +49,13 @@ public class SassToCssBuilderMojoTest extends AbstractLiferayMojoTestCase {
     protected void generateSassToCssBuilderProject() throws Exception {
         generateArchetype("liferay-theme-archetype");
 
-        File pomPath = new File("target/testproject/pom.xml");
+        File pomPath = new File(getBasedir() + "/target/testproject/pom.xml");
         FileUtils.forceDelete(pomPath);
         FileUtils.copyFile(
-            new File("src/test/resources/theme/pom.xml"), pomPath);
+            new File(getBasedir() + "/src/test/resources/theme/pom.xml"),
+            pomPath);
 
-        String cssDir = "target/testproject/target/" +
+        String cssDir = getBasedir() + "/target/testproject/target/" +
                         "testproject-1.0-SNAPSHOT/css/";
         File file = new File(cssDir);
         file.mkdirs();

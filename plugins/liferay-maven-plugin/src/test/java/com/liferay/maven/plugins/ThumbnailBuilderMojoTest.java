@@ -31,7 +31,7 @@ public class ThumbnailBuilderMojoTest extends AbstractLiferayMojoTestCase {
     public void testThumbnailBuilder() throws Exception {
         generateThumbnailBuilderTestProject();
 
-        verifier = new Verifier("target/testproject");
+        verifier = new Verifier(getBasedir() + "/target/testproject");
 
         executeGoal("liferay:build-thumbnail");
 
@@ -45,12 +45,14 @@ public class ThumbnailBuilderMojoTest extends AbstractLiferayMojoTestCase {
     protected void generateThumbnailBuilderTestProject() throws Exception {
         generateArchetype("liferay-theme-archetype");
 
-        File pomPath = new File("target/testproject/pom.xml");
+        File pomPath = new File(getBasedir() + "/target/testproject/pom.xml");
         FileUtils.forceDelete(pomPath);
         FileUtils.copyFile(
-            new File("src/test/resources/theme/pom.xml"), pomPath);
+            new File(getBasedir() + "/src/test/resources/theme/pom.xml"),
+            pomPath);
 
-        String imageDir = "target/testproject/src/main/webapp/images/";
+        String imageDir = getBasedir() +
+            "/target/testproject/src/main/webapp/images/";
         File file = new File(imageDir);
         file.mkdirs();
 
@@ -60,7 +62,9 @@ public class ThumbnailBuilderMojoTest extends AbstractLiferayMojoTestCase {
 
         file = new File(imageDir + "screenshot.png");
         FileUtils.copyFile(
-            new File("src/test/resources/thumbnail/screenshot.png"), file);
+            new File(
+                getBasedir() + "/src/test/resources/thumbnail/screenshot.png"),
+            file);
     }
 
 }
