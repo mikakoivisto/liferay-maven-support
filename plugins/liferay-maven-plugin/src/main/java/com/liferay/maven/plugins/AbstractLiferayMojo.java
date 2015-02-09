@@ -40,6 +40,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.factory.ArtifactFactory;
+import org.apache.maven.artifact.handler.ArtifactHandler;
 import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.artifact.resolver.ArtifactResolver;
 import org.apache.maven.model.Dependency;
@@ -259,16 +260,55 @@ public abstract class AbstractLiferayMojo extends AbstractMojo {
 
 		projectClassPath.addAll(getToolsClassPath());
 
-		for (Object object : project.getCompileClasspathElements()) {
-			String path = (String)object;
+		List<MavenProject> classPathMavenProjects =
+			new ArrayList<MavenProject>();
 
-			File file = new File(path);
+		classPathMavenProjects.add(project);
 
-			URI uri = file.toURI();
+		for (Object object : project.getDependencyArtifacts()) {
+			Artifact artifact = (Artifact)object;
 
-			URL url = uri.toURL();
+			ArtifactHandler artifactHandler = artifact.getArtifactHandler();
 
-			projectClassPath.add(url.toString());
+			if (!artifactHandler.isAddedToClasspath()) {
+				continue;
+			}
+
+			MavenProject dependencyMavenProject = resolveProject(artifact);
+
+			if (dependencyMavenProject == null) {
+				continue;
+			}
+
+			List<String> compileSourceRoots =
+				dependencyMavenProject.getCompileSourceRoots();
+
+			if (compileSourceRoots.isEmpty()) {
+				continue;
+			}
+
+			getLog().debug(
+				"Adding project to class path " + dependencyMavenProject);
+
+			classPathMavenProjects.add(dependencyMavenProject);
+		}
+
+		for (MavenProject classPathMavenProject : classPathMavenProjects) {
+			for (Object object :
+					classPathMavenProject.getCompileClasspathElements()) {
+
+				String path = (String)object;
+
+				getLog().debug("Class path element " + path);
+
+				File file = new File(path);
+
+				URI uri = file.toURI();
+
+				URL url = uri.toURL();
+
+				projectClassPath.add(url.toString());
+			}
 		}
 
 		getLog().debug("Project class path:");
