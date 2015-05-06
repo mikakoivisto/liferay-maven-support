@@ -249,7 +249,6 @@ public class ServiceBuilderMojo extends AbstractToolsLiferayMojo {
 					"/META-INF/portlet-model-hints.xml");
 				ormFileName = webappResourcesDir.concat(
 					"/META-INF/portlet-orm.xml");
-				serviceFileName = webappDir.concat("/WEB-INF/service.xml");
 				springBaseFileName = webappResourcesDir.concat(
 					"/META-INF/base-spring.xml");
 				springClusterFileName = webappResourcesDir.concat(
