@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE layout-templates PUBLIC "-//Liferay//DTD Layout Templates 6.2.0//EN" "http://www.liferay.com/dtd/liferay-layout-templates_6_2_0.dtd">
+
+<layout-templates>
+	<custom>
+		<layout-template id="default" name="default">
+			<template-path>/default.tpl</template-path>
+			<wap-template-path>/default.wap.tpl</wap-template-path>
+			<thumbnail-path>/default.png</thumbnail-path>
+		</layout-template>
+	</custom>
+</layout-templates>
