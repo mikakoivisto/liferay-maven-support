@@ -20,5 +20,8 @@
 		<fileSet filtered="true">
 			<directory>src/main/webapp</directory>
 		</fileSet>
+		<fileSet encoding="UTF-8" filtered="true">
+			<directory>src/main/webapp/_diffs</directory>
+		</fileSet>
 	</fileSets>
 </archetype-descriptor>
